@@ -134,6 +134,7 @@ public class EquMessageInbound extends StreamInbound {
 	}
 	private void doLogin(JSONObject params) throws Exception {
 		common_params = params;
+		LogUtil.singleDebugPrintf(params.toString());
 		String username = (String) common_params.remove("username");
 		String password = (String) common_params.remove("password");
 		// JSONObject loginInfo = new

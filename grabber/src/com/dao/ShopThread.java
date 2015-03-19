@@ -316,8 +316,8 @@ public class ShopThread implements Runnable {
 		dyparams.append("&PurchaseOrderNew1%24hdPrice=" + this.getParams().getString("price"));
 		dyparams.append("&PurchaseOrderNew1%24hdDefFee=0.00");
 		dyparams.append("&PurchaseOrderNew1%24QuantityInfo1%24ddlQuantity=1");
-		dyparams.append("&PurchaseOrderNew1%24BuyerGameRoleInfo1%24txtGameRole=" + this.getParams().getString("txtGameRole"));
-		dyparams.append("&PurchaseOrderNew1%24BuyerGameRoleInfo1%24txtGameRoleValidate=" + this.getParams().getString("txtGameRole"));
+		dyparams.append("&PurchaseOrderNew1%24BuyerGameRoleInfo1%24txtGameRole=" +URLEncoder.encode( this.getParams().getString("txtGameRole"), "gb2312"));
+		dyparams.append("&PurchaseOrderNew1%24BuyerGameRoleInfo1%24txtGameRoleValidate=" +URLEncoder.encode( this.getParams().getString("txtGameRole"), "gb2312"));
 		dyparams.append("&PurchaseOrderNew1%24txtRoleGrade=" + this.getParams().getString("rolelevel"));
 		dyparams.append("&PurchaseOrderNew1%24hide_VipKefuId=" + hide_VipKefuId);
 		dyparams.append("&PurchaseOrderNew1%24rdPostSaleGroup=rdNoPostSale");
@@ -539,6 +539,7 @@ public class ShopThread implements Runnable {
 		StringBuffer dyparams = new StringBuffer(4000);
 		HttpURLConnection conn = getHttpGetConn(keyurl);
 		conn.setRequestProperty("Referer", keyurl);
+		conn.setRequestProperty("Host", "danbao.5173.com");
 		Parser parser = new Parser(conn);
 		parser.setEncoding("UTF-8");
 		NodeList list = parser.parse(null);
