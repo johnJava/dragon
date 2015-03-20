@@ -31,7 +31,8 @@ import com.web.EquMessageService;
 
 public class ShopThread implements Runnable {
 	private HashMap<String, String> cookies;
-	private final String USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; rv:34.0) Gecko/20100101 Firefox/34.0";
+//	private final String USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; rv:34.0) Gecko/20100101 Firefox/34.0";
+	private final String USER_AGENT = "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)";
 	private JSONObject params;
 	private String jsshopurl = "http://consignment.5173.com/PurchaseProcess/fillOrder.aspx?BizOfferId=&shopnum&&TradingServiceType=Consignment";
 	private String ptshopurl = "http://danbao.5173.com/auction/buynew/PurchaseOrderNew.aspx?BizOfferId=&shopnum&";
@@ -502,6 +503,8 @@ public class ShopThread implements Runnable {
 		HttpURLConnection loginConn = getHttpPostConn(keyurl);
 		loginConn.setRequestProperty("Accept-Encoding", "deflate");// 注意压缩方式
 		loginConn.setRequestProperty("Referer", keyurl);
+		loginConn.setRequestProperty("Host", "danbao.5173.com");
+		loginConn.setRequestProperty("Pragma", "no-cache");
 		loginConn.setRequestProperty("Content-Length", Integer.toString(postParams.length()));
 		LogUtil.debugPrintf("请求获取key的HEADER===" + loginConn.getRequestProperties());
 		LogUtil.debugPrintf("请求获取key的postParams===" + postParams);
@@ -535,6 +538,7 @@ public class ShopThread implements Runnable {
 	}
 
 	private String getKeyDynamicParams(String keyurl, String type) throws Exception {
+		
 		LogUtil.debugPrintf("获取key的参数...");
 		StringBuffer dyparams = new StringBuffer(4000);
 		HttpURLConnection conn = getHttpGetConn(keyurl);

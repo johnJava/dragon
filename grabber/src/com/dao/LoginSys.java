@@ -31,7 +31,8 @@ import com.web.EquMessageService;
 public class LoginSys {
 	private JSONObject loginInfo;
 	private HashMap<String, String> cookies;
-	private final String USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; rv:34.0) Gecko/20100101 Firefox/34.0";
+//	private final String USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; rv:34.0) Gecko/20100101 Firefox/34.0";
+	private final String USER_AGENT = "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)";
 	private final String loginURL = "https://passport.5173.com/";
 	private boolean state = false;
 

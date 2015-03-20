@@ -16,21 +16,15 @@ public class EquMessageService extends WebSocketServlet {
 	public static EquMessageInbound inbound = null;
 
 	private final AtomicInteger connectionIds = new AtomicInteger(0);
-	private String sessionid="";
+	private String sessionid = "";
 
 	@Override
 	protected StreamInbound createWebSocketInbound(String arg0, HttpServletRequest request) {
-		String datestr = new SimpleDateFormat("yyyy-MM-dd").format(System.currentTimeMillis());
-		if (!GenericUtil.isEndDate()) {
-			if (inbound == null||!this.sessionid.equals(request.getSession().getId())){
-				this.sessionid=request.getSession().getId();
-				inbound = new EquMessageInbound(connectionIds.getAndIncrement(), this.sessionid);
-			}
-			return inbound;
-		}else{
-			System.out.println("软件已经过期，请联系供应商！");
-			return null;
+		if (inbound == null || !this.sessionid.equals(request.getSession().getId())) {
+			this.sessionid = request.getSession().getId();
+			inbound = new EquMessageInbound(connectionIds.getAndIncrement(), this.sessionid);
 		}
+		return inbound;
 	}
 
 }

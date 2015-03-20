@@ -77,22 +77,30 @@ public class EquMessageInbound extends StreamInbound {
 	}
 
 	public void receive(String msg) throws JSONException, Exception {
-		LogUtil.debugPrintf("receive-->" + msg);
-		JSONObject jsonobj = new JSONObject(msg);
-		String action = (String) jsonobj.get("action");
-		if (action.equalsIgnoreCase("login")) {
-			doLogin((JSONObject) jsonobj.get("msg"));
-		} else if (action.equalsIgnoreCase("start")) {
-			doStart((JSONObject) jsonobj.get("msg"));
-		} else if (action.equalsIgnoreCase("shop")) {
-			doShop((JSONObject) jsonobj.get("msg"));
-		} else if (action.equalsIgnoreCase("stop")) {
-			doStop();
-		} else if (action.equalsIgnoreCase("play")) {
-			doPlay((JSONObject) jsonobj.get("msg"));
+		if(check()){
+			LogUtil.webPrintf("软件已经过期，请联系供应商！");
+		}else{
+			LogUtil.debugPrintf("receive-->" + msg);
+			JSONObject jsonobj = new JSONObject(msg);
+			String action = (String) jsonobj.get("action");
+			if (action.equalsIgnoreCase("login")) {
+				doLogin((JSONObject) jsonobj.get("msg"));
+			} else if (action.equalsIgnoreCase("start")) {
+				doStart((JSONObject) jsonobj.get("msg"));
+			} else if (action.equalsIgnoreCase("shop")) {
+				doShop((JSONObject) jsonobj.get("msg"));
+			} else if (action.equalsIgnoreCase("stop")) {
+				doStop();
+			} else if (action.equalsIgnoreCase("play")) {
+				doPlay((JSONObject) jsonobj.get("msg"));
+			}
 		}
 	}
 
+	private boolean check(){
+		String datestr = new SimpleDateFormat("yyyy-MM-dd").format(System.currentTimeMillis());
+		return GenericUtil.isEndDate();
+	}
 	private void doPlay(JSONObject item) {
 		equitem.setRadio(item.getBoolean("radio"));
 	}
@@ -134,7 +142,7 @@ public class EquMessageInbound extends StreamInbound {
 	}
 	private void doLogin(JSONObject params) throws Exception {
 		common_params = params;
-		LogUtil.singleDebugPrintf(params.toString());
+		LogUtil.debugPrintf(params.toString());
 		String username = (String) common_params.remove("username");
 		String password = (String) common_params.remove("password");
 		// JSONObject loginInfo = new

@@ -21,7 +21,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 public class GenericUtil {
 	public static SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private static final String MUSIC_FILE = new GenericUtil().getClass().getResource("/").getPath()+ "\\alarm.wav";
-	private static final String endDate="2015-03-19";
+	private static final String endDate="2015-03-31";
 	public static void main(String[] args) {
 		System.out.println(isEndDate());
 	}
