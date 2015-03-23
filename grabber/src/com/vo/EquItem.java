@@ -13,6 +13,7 @@ public class EquItem {
 	private double minprice;
 	private boolean radio;
 	private String baseurl="http://s.5173.com/dnf-0-0-0-0-2zkpio-0-0-0-a-a-a-a-a-0-addnewdate_desc-0-0.shtml";
+//	private String baseurl="http://s.5173.com/dnf-0-0-0-0-bx1xiv-0-0-0-a-a-a-a-a-0-addnewdate_desc-0-0.shtml";
 	private Set<String> creditSet=null;
 	private int pageIndex=0;
 	
